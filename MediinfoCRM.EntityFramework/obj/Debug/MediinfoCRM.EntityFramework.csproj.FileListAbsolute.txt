@@ -1,0 +1,10 @@
+d:\Documents\Visual Studio 2012\Projects\CRMWeb\MediinfoCRM.EntityFramework\bin\Debug\MediinfoCRM.EntityFramework.dll
+d:\Documents\Visual Studio 2012\Projects\CRMWeb\MediinfoCRM.EntityFramework\bin\Debug\MediinfoCRM.EntityFramework.pdb
+d:\Documents\Visual Studio 2012\Projects\CRMWeb\MediinfoCRM.EntityFramework\obj\Debug\MediinfoCRM.EntityFramework.dll
+d:\Documents\Visual Studio 2012\Projects\CRMWeb\MediinfoCRM.EntityFramework\obj\Debug\MediinfoCRM.EntityFramework.pdb
+d:\Documents\Visual Studio 2012\Projects\CRMWeb\MediinfoCRM.EntityFramework\obj\Debug\MediinfoCRM.EntityFramework.csprojResolveAssemblyReference.cache
+D:\GitHub\ShangJiGLWeb\MediinfoCRM.EntityFramework\bin\Debug\MediinfoCRM.EntityFramework.dll
+D:\GitHub\ShangJiGLWeb\MediinfoCRM.EntityFramework\bin\Debug\MediinfoCRM.EntityFramework.pdb
+D:\GitHub\ShangJiGLWeb\MediinfoCRM.EntityFramework\bin\Debug\Oracle.DataAccess.dll
+D:\GitHub\ShangJiGLWeb\MediinfoCRM.EntityFramework\obj\Debug\MediinfoCRM.EntityFramework.dll
+D:\GitHub\ShangJiGLWeb\MediinfoCRM.EntityFramework\obj\Debug\MediinfoCRM.EntityFramework.pdb

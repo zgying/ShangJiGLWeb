@@ -1,0 +1,4 @@
+d:\Documents\Visual Studio 2012\Projects\CRMWeb\MediinfoCRM.EntityFramework\bin\Release\MediinfoCRM.EntityFramework.dll
+d:\Documents\Visual Studio 2012\Projects\CRMWeb\MediinfoCRM.EntityFramework\bin\Release\MediinfoCRM.EntityFramework.pdb
+d:\Documents\Visual Studio 2012\Projects\CRMWeb\MediinfoCRM.EntityFramework\obj\Release\MediinfoCRM.EntityFramework.dll
+d:\Documents\Visual Studio 2012\Projects\CRMWeb\MediinfoCRM.EntityFramework\obj\Release\MediinfoCRM.EntityFramework.pdb
