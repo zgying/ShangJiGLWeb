@@ -145,7 +145,7 @@ namespace MediinfoCRM.EntityFramework
 
                 OracleCommand cmd = new OracleCommand();
                 cmd.Connection = conn;
-                cmd.CommandText = "select zhigongid,xingming,suozaiks,keshimc from v_sjgl_zhigongxx a where zhuxiaobz <> 1 and keshimc like '%营销%' order by xingming "; //"0283"
+                cmd.CommandText = "select zhigongid,xingming,xingmingpy,suozaiks,keshimc from v_sjgl_zhigongxx a where zhuxiaobz <> 1 order by xingming "; //"0283"
                 cmd.CommandType = CommandType.Text;
 
                 OracleDataReader dr = cmd.ExecuteReader();
@@ -155,6 +155,7 @@ namespace MediinfoCRM.EntityFramework
                     ZhiGongXX item = new ZhiGongXX();
                     item.ZhiGongID = dr["zhigongid"].ToString();
                     item.XingMing = dr["xingming"].ToString();
+                    item.XingMingPY = dr["xingmingpy"].ToString();
                     item.SuoZaiKS = dr["suozaiks"].ToString();
                     item.KeShiMC = dr["keshimc"].ToString();
 

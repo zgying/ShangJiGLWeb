@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ShangJiList.aspx.cs" Inherits="ShangJiList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="ShangJiList" %>
 
 	<!DOCTYPE html>
 
@@ -9,6 +9,7 @@
 		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
 	
 		<link rel="stylesheet" href="scripts/jquery.mobile-1.3.2.min.css" />
+        <link href="Scripts/mycss.css" rel="stylesheet" />
 		<script src="scripts/jquery-1.11.1.min.js"></script>
 		<script src="scripts/jquery.mobile-1.3.2.min.js"></script>
 		<script src="Scripts/handlebars-v4.0.2.js"></script>
@@ -40,7 +41,7 @@
 		<script type="text/javascript">
 		    $(document).ready(function () {
 
-		        console.log("shangjilist.aspx pageinit");
+		        console.log("default.aspx pageinit");
 
 		        $.ajax({
 		            type: "get",
@@ -88,7 +89,7 @@
 			<div data-role="footer" data-position="fixed" data-theme="d">
 				<div data-role="navbar">
 					<ul>
-						<li><a href="shangjilist.aspx" data-icon="grid" class="ui-btn-active">商机</a></li>
+						<li><a href="default.aspx" data-icon="grid" class="ui-btn-active">商机</a></li>
 						<li><a href="#" data-icon="search">发现</a></li>
 						<li><a href="#" data-icon="gear">我</a></li>
 					</ul>

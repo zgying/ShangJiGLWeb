@@ -11,6 +11,7 @@
 <meta http-equiv="Cache-Control" content="no-store, must-revalidate"/>   
 <meta http-equiv="Pragma" content="no-cache"/> 
 <link rel="stylesheet" href="scripts/jquery.mobile-1.3.2.min.css"/>
+    <link href="Scripts/mycss.css" rel="stylesheet" />
 <script src="scripts/jquery-1.11.1.min.js"></script>
 <script src="scripts/jquery.mobile-1.3.2.min.js"></script>
 <script src="Scripts/handlebars-v4.0.2.js"></script>
@@ -149,7 +150,7 @@
         <script type="text/javascript">
 
             function goback2ShangJi() {
-                window.location.replace('shangjilist.aspx');
+                window.location.replace('Default.aspx');
 
             }
 

@@ -1,15 +1,14 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AddGenZong.aspx.cs" Inherits="AddGenZong" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AddShangJi.aspx.cs" Inherits="AddShangJi" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name = "viewport" content = "width=device-width, minimum-scale=1, maximum-scale=1"> 
 <link rel="stylesheet" href="scripts/jquery.mobile-1.3.2.min.css">
     <link href="Scripts/mycss.css" rel="stylesheet" />
-<link href="Scripts/mycss.css" rel="stylesheet" />
 <script src="scripts/jquery-1.11.1.min.js"></script>
 <script src="scripts/jquery.mobile-1.3.2.min.js"></script>
 <script src="Scripts/handlebars-v4.0.2.js"></script>
@@ -18,10 +17,10 @@
 <body>
      <!----模板库-->     
      <script id="tmplZhiGongXX" type="text/x-handlebars-template">
-     <h2>营销平台通讯录</h2>      
-        <ul id="ulYuanGong" data-role="listview" data-filter-reveal="true" data-inset="true" data-filter="true" data-filter-placeholder="输入首字母或汉字......">
+     <h2>营销平台通讯录</h2>
+        <ul data-role="listview" data-autodividers="true" data-inset="true" data-filter="true" data-filter-placeholder="搜索姓名 ...">
         {{#each this}}
-        <li data-filtertext="{{XingMingPY}}" ><a href="javascript:seldata('{{ZhiGongID}}','{{XingMing}}','{{SuoZaiKS}}','{{KeShiMC}}');">{{XingMingSZM}} {{XingMing}}  {{KeShiMC}}</a></li>        
+        <li><a href="javascript:seldata('{{ZhiGongID}}','{{XingMing}}','{{SuoZaiKS}}','{{KeShiMC}}');">{{XingMing}}</a></li>        
         {{/each}}	
         </ul>       
     </script>
@@ -38,7 +37,7 @@
             dataType: "json",
             success: function (data) {
                 console.log("getzgxx data");
-                
+
                 var tmpl = Handlebars.compile($("#tmplZhiGongXX").html());
                 $("#popupYuanGong").html(tmpl(data));
                 $("#popupYuanGong").trigger("create");
@@ -88,15 +87,14 @@
 					</div>
 					
 					<div data-role="fieldcontain">
-						<%--<label for="XieTongRY"><a href="#popupYuanGong" data-rel="popup" data-position-to="window">选择协同人员</a></label>--%> 
-                        <label for="XieTongRY">协同人员</label>
+						<label for="XieTongRY"><a href="#popupYuanGong" data-rel="popup" data-position-to="window">选择协同人员</a></label> 
 						<input name="XieTongRYXM" id="ipXieTongRYXM" placeholder="协同人员" readonly="true" />
                         <input name="XieTongRYBMMC" id="ipXieTongRYBMMC" placeholder="协同人员科室" readonly="true" />
                         <input name="XieTongRYID" type="hidden" id="ipXieTongRYID" value="" />
                         <input name="XieTongRYBMID" type="hidden" id="ipXieTongRYBMID" value="" />
 					</div>
 
-                    <div data-role="popup" id="popupYuanGong" data-transition="flip" data-overlay-theme="a" data-theme="e" class="ui-content">
+                    <div data-role="popup" id="popupYuanGong" data-transition="flip">
                       
                     </div>
 				</div>
@@ -104,7 +102,7 @@
 			</form>		
         <script type="text/javascript">
 
-           
+
             //取URL参数
 
             $.extend({
@@ -146,11 +144,6 @@
                 var sjxh = $.getUrlVar('sjxh');
                 ("genzong.aspx?sjxh=" + sjxh);
 
-                //选择框                
-                $("#ipXieTongRYXM").focus(function () {
-                    $("#popupYuanGong").popup("open");
-                });
-
                 $("#submit").click(function () {
 
                     console.log("submit click");
@@ -159,8 +152,7 @@
                     $("#ipShangJiXH").val(sjxh);
 
                     //check date
-                    if ($("#dtBaiFangRQ").val()== "" )
-                    {                        
+                    if ($("#dtBaiFangRQ").val() == "") {
                         alert("请输入日期！");
                         $("#dtBaiFangRQ").focus().select();
                         return false;
@@ -182,16 +174,13 @@
                     //    success: onSuccess,
                     //    error: onError
                     //});
+
+
                 });
             });
 
             $("#popupYuanGong").on("popupafterclose", function (event, ui) {
                 console.log("popupafterclose");
-            });
-
-            $("#popupYuanGong").on("popupafteropen", function (event, ui) {
-                console.log("popupafteropen");
-                //$(".ui-input-text ui-body-c").focus().select();
             });
 
             function seldata(zgid, zgmc, szks, ksmc) {
@@ -202,7 +191,6 @@
                 $("#ipXieTongRYBMID").val(szks);
 
                 $("#popupYuanGong").popup("close");
-
             }
 
             //
