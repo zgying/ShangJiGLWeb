@@ -32,6 +32,7 @@
 
     $(document).ready(function () {
 
+        //获取职工信息
         $.ajax({
             type: "get",
             url: "util.ashx?cmd=getzgxx",
@@ -48,6 +49,8 @@
                 alert("异常！");
             }
         });
+
+     
     })
 </script>
 
@@ -59,6 +62,96 @@
 					<h5>新跟踪记录</h5>
 					<a id="submit" href="#" data-role="button" data-icon="check" >保存</a>
 				</div>
+
+                 
+                <div data-role="content" data-theme="d">
+                    <%--商机类别--%>
+                    <div data-role="fieldcontain">                        
+						<label for="GenZongFS">商机类别:</label>
+						<select id="selShangJiLB" name="ShangJiLB">
+							<option value="033007">临床电子病历（版本升级）</option>
+                            <option value="033002">HIS(新增)</option>
+                            <option value="033005">数据安全管理</option>
+                            <option value="033006">临床电子病历（新客户）</option>
+                            <option value="033001">HIS（新客户）</option>
+                            <option value="033008">临床无线医护</option>
+                            <option value="033004">先诊疗后付费（银联）</option>
+                            <option value="033009">临床路径</option>
+                            <option value="033010">健康体检</option>
+                            <option value="033011">后勤物流管理平台</option>
+                            <option value="033003">HIS（版本升级）</option>
+                            <option value="033012">综合服务平台</option>
+                            <option value="033013">经济运营管理平台</option>
+                            <option value="033014">集成平台&数据中心&BI</option>
+                            <option value="033018">区域基层医疗业务平台</option>
+                            <option value="033019">区域医疗信息交换平台</option>
+                            <option value="033020">第三方代理产品</option>
+                            <option value="33021">运维托管</option>
+                            <option value="33022">售后新增</option>
+                            <option value="33023">临床检验LIS</option>							
+						</select>
+					</div>
+
+                    <%--商机内容--%>
+                    <div data-role="fieldcontain">
+						<label for="ShangJiNR">商机内容</label>
+						<textarea name="ShangJiNR" id="txtShangJiNR" data-mini="true" placeholder="商机内容"></textarea>
+					</div>
+
+                    <%--项目预算--%>
+                    <div data-role="fieldcontain">
+                        <label for="XiangMuYS">项目预算</label>
+                        <input type="number" data-clear-btn="false" name="XiangMuYS" pattern="[0-9]*" id="ipXiangMuYS" value=""/>       
+                    </div>
+
+                    <%--预计结单时间--%>
+                    <div data-role="fieldcontain">
+						<label for="JieDanSJ">结单时间</label>
+						<input type="date" name="JieDanSJ" id="dtJieDanSJ" value=""/>
+					</div>
+
+                    <%--采购方式--%>
+                    <div data-role="fieldcontain">
+                        <label for="CaiGouFS">采购方式:</label>
+						<select id="selCaiGouFS" name="CaiGouFS">
+							<option value="1">政府协议采购</option>
+                            <option value="2">公开招标</option>
+                            <option value="3">邀请招标</option>
+                            <option value="4">竞争性谈判</option>
+                            <option value="5">单一来源采购</option>
+                            <option value="6">询价采购</option>
+                            <option value="7">自行采购</option>
+                        </select>
+					</div>
+
+                    <%--当前进度--%>
+                    <div data-role="fieldcontain">
+                        <label for="DangQianJD">当前进度:</label>
+						<select id="selDangQianJD" name="DangQianJD">
+							<option value="1">发现商机</option>
+                            <option value="2">客户拜访</option>
+                            <option value="3">技术认可</option>
+                            <option value="4">商务报价</option>
+                            <option value="5">获得承诺</option>
+                            <option value="6">项目成单</option>
+                            <option value="7">项目失败</option>
+                        </select>
+					</div>
+
+                    <%--成单概率--%>
+                    <div data-role="fieldcontain">
+                        <label for="ChengDanGL">成单概率:</label>
+                        <input type="range" name="ChengDanGL" id="ragChengDanGL" data-highlight="true" min="0" max="100" value="50"/>
+                    </div>
+
+                    
+                     <div data-role="fieldcontain">
+						<label for="ShangJiBZ">备注</label>
+						<textarea name="ShangJiBZ" id="txtShangJiBZ" data-mini="true" placeholder="商机备注"></textarea>
+					</div>
+                </div>
+
+
 
 				<div data-role="content" data-theme="d">
 
@@ -96,17 +189,16 @@
                         <input name="XieTongRYBMID" type="hidden" id="ipXieTongRYBMID" value="" />
 					</div>
 
-                    <div data-role="popup" id="popupYuanGong" data-transition="flip" data-overlay-theme="a" data-theme="e" class="ui-content">
+                    <div data-role="popup" id="popupYuanGong" data-transition="flip" data-overlay-theme="a" data-theme="e" class="ui-content" data-position-to="#position-header">
                       
                     </div>
+
 				</div>
 
 			</form>		
         <script type="text/javascript">
-
-           
+            //公用函数
             //取URL参数
-
             $.extend({
                 getUrlVars: function () {
                     var vars = [], hash;
@@ -122,7 +214,54 @@
                     return $.getUrlVars()[name];
                 }
             });
+        </script>
 
+        <%--加载商机信息--%>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var sjxh = $.getUrlVar('sjxh');
+                console.log("get shangjixx",sjxh);
+
+                //获取商机信息
+                $.ajax({
+                    type: "get",
+                    url: "util.ashx?cmd=getsjxxbyxh&sjxh=" + sjxh,
+                    dataType: "json",
+                    success: function (data) {
+                        console.log("getsjbyid data", data);
+                        var sjmx = data;
+                        //填充商机数据
+                        $("#selShangJiLB").val(sjmx.LeiBie);
+                        $("#selShangJiLB").val(sjmx.LeiBie).attr('selected', true).siblings('option').removeAttr('selected');
+                        $("#selShangJiLB").selectmenu('refresh', true);
+
+                        $("#txtShangJiNR").text(sjmx.NeiRong);
+                        $("#ipXiangMuYS").val(sjmx.XiangMuYS);
+                        $("#dtJieDanSJ").val(sjmx.YuQi);
+
+                        $("#selCaiGouFS").val(sjmx.CaiGouFS);
+                        $("#selCaiGouFS").val(sjmx.CaiGouFS).attr('selected', true).siblings('option').removeAttr('selected');
+                        $("#selCaiGouFS").selectmenu('refresh', true);
+
+                        $("#selDangQianJD").val(sjmx.DangQianJD);
+                        $("#selDangQianJD").val(sjmx.DangQianJD).attr('selected', true).siblings('option').removeAttr('selected');
+                        $("#selDangQianJD").selectmenu('refresh', true);
+
+                        var cdl = sjmx.ChengDanGL.substring(0, sjmx.ChengDanGL.length - 1);
+                        $("#ragChengDanGL").val(cdl).slider("refresh");
+
+                        $("#txtShangJiBZ").val(sjmx.BeiZhu);
+
+                    },
+                    error: function () {
+                        alert("获取商机信息异常！");
+                    }
+                });
+            });
+        </script> 
+
+        <script type="text/javascript">
+            //转向链接
             function go2GenZong() {
                 var sjxh = $.getUrlVar('sjxh');
                 window.location.replace('genzong.aspx?sjxh=' + sjxh);
@@ -142,15 +281,16 @@
                 //window.location.href = "error.html";
             }
 
-            $(document).ready(function () {
-                var sjxh = $.getUrlVar('sjxh');
-                ("genzong.aspx?sjxh=" + sjxh);
+            $(document).ready(function () {               
+                //获取商机信息，绑定到现有页面
 
-                //选择框                
+
+                //获得焦点时弹出选择列表                
                 $("#ipXieTongRYXM").focus(function () {
                     $("#popupYuanGong").popup("open");
                 });
 
+                //绑定表单提交事件
                 $("#submit").click(function () {
 
                     console.log("submit click");
@@ -194,6 +334,7 @@
                 //$(".ui-input-text ui-body-c").focus().select();
             });
 
+            //选中协调人员后赋值
             function seldata(zgid, zgmc, szks, ksmc) {
                 console.log(zgid, zgmc, szks, ksmc);
                 $("#ipXieTongRYXM").val(zgmc);

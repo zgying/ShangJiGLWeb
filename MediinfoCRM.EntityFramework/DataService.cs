@@ -70,20 +70,25 @@ namespace MediinfoCRM.EntityFramework
 
                 OracleCommand cmd = new OracleCommand();
                 cmd.Connection = conn;
-                cmd.CommandText = "select * from V_SJGL_E_SHANGJIMX_4GENZONG a where XUHAO = '" + shangjixh + "'"; //"0283"
+                cmd.CommandText = "select * from V_SJGL_E_SHANGJIMX a where XUHAO = '" + shangjixh + "'"; //"0283"
                 cmd.CommandType = CommandType.Text;
 
                 OracleDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    rtn.XuHao = dr["XUHAO"].ToString();
-                    rtn.KeHuMC = dr["KEHUMC"].ToString();
-                    rtn.LeiBieMC = dr["LEIBIEMC"].ToString();
-                    rtn.NeiRong = dr["NEIRONG"].ToString();
-                    rtn.GenZongZTMC = dr["GENZONGZTMC"].ToString();
-                    rtn.YuQi = dr["YUQI"].ToString();
-                    rtn.CaiGouFS = dr["CAIGOUFS"].ToString();
-                    rtn.ChengDanGL = dr["CHENGDANGL"].ToString();
+                    rtn.XuHao = dr["XUHAO"].ToString();             //序号
+                    rtn.KeHuMC = dr["KEHUMC"].ToString();               //客户名称
+                    rtn.LeiBieMC = dr["LEIBIEMC"].ToString();           //类别名称
+                    rtn.NeiRong = dr["NEIRONG"].ToString();             //商机内容
+                    rtn.GenZongZTMC = dr["GENZONGZTMC"].ToString();     //跟踪状态名称
+                    rtn.YuQi = Convert.ToDateTime(dr["YUQI"].ToString()).ToString("yyyy-MM-dd");                   //预期
+                    rtn.CaiGouFS = dr["CAIGOUFSDM"].ToString();           //采购方式
+                    rtn.CaiGouFSMC = dr["CAIGOUFS"].ToString();           //采购方式
+
+                    rtn.ChengDanGL = dr["CHENGDANGL"].ToString();       //成单概率 dr[""].ToString();
+                    rtn.LeiBie = dr["LEIBIE"].ToString();               //商机类别
+                    rtn.XiangMuYS = dr["XIANGMUYS"].ToString();         //项目预算
+                    rtn.DangQianJD = dr["GenZongZT"].ToString();        //当前进度 即 跟踪状态                    
                 }
             }
 

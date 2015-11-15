@@ -1,0 +1,45 @@
+1.所属区域：
+字段：QY,QYMC
+select dm,xzdm,qhmc from xt_xzqh  where zfpb=0 order by pxxh
+dm:唯一码,对应QY
+xzdm:可视编码
+qhmc:区划名称,对应 QYMC
+
+2.采购方式：
+字段：CGFS
+select dm,mc from xt_gydm where lbdm='023' and nvl(zfpb,0)=0 order by pxxh
+dm:采购方式代码
+mc:采购方式名称
+商机表里存储的就是dm字段的值
+
+3.客户名称
+字段：KHID,KHBH,KHMC
+select khdm,khbh,khmc from crm_khxx where nvl(zfpb,0)=0 order by pxxh
+khdm:唯一码
+khbh:客户编号
+khmc:客户名称
+商机表里存储了这三个字段的值
+
+4.商机来源：
+字段：SJLY
+select dm,mc from xt_gydm where lbdm='026' and nvl(zfpb,0)=0 order by pxxh
+dm:商机来源代码
+mc:商机来源名称
+商机表里存储的就是dm字段的值
+
+5.商机类别：
+字段：LB
+select dm,mc from xt_gydm where lbdm='033' and nvl(zfpb,0)=0 order by pxxh
+dm:商机类别代码
+mc:商机类别名称
+商机表里存储的就是dm字段的值
+
+6.当前进度
+字段：DQJD
+select dm,mc from xt_gydm where lbdm='024' and nvl(zfpb,0)=0 order by pxxh
+dm:当前进度代码
+mc:当前进度名称
+商机表里存储的就是dm字段的值
+
+7.商机内容：
+文本内容，字段：SJNR

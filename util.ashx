@@ -38,6 +38,22 @@ public class util : IHttpHandler, IRequiresSessionState{
                 rtn = ser.Serialize(zgxx);
                 break;
 
+            case "GETSJXXBYXH":
+
+                string sjxh;
+                if (String.IsNullOrEmpty(context.Request.QueryString["sjxh"]))
+                {
+                    context.Response.Write("参数错误！");
+                    return;
+                }
+                sjxh = context.Request.QueryString["sjxh"].ToString();
+
+                ShangJiMX sjmx = new ShangJiMX();
+                sjmx = DataService.getShangJiMX(sjxh );
+
+                rtn = ser.Serialize(sjmx);
+                break;
+                
             case "ELSE":
                 rtn = string.Empty;
                 break;
