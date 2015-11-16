@@ -100,7 +100,7 @@
 
                     <%--项目预算--%>
                     <div data-role="fieldcontain">
-                        <label for="XiangMuYS">项目预算</label>
+                        <label for="XiangMuYS">项目预算（万元）</label>
                         <input type="number" data-clear-btn="false" name="XiangMuYS" pattern="[0-9]*" id="ipXiangMuYS" value=""/>       
                     </div>
 
@@ -214,6 +214,96 @@
                     return $.getUrlVars()[name];
                 }
             });
+
+            function $isEmpty(Variables) {
+                var TypeName = $.type(Variables);
+                return TypeName == 'undefined' || TypeName == null || Variables == '' ? true : false;
+            }
+
+            function in_array(s, arr) {
+                if ($.type(arr) == 'array') {
+                    for (var ai = 0; ai < arr.length; ai++) {
+                        if (arr[ai] == s) return true;
+                    }
+                }
+                return false;
+            }
+
+            function inputDefault(obj, val) {
+                var type = $.type(obj) == 'string' ? $(obj) : obj;
+                if (type.length == 0 || $isEmpty(val)) return;
+                var tagName = type[0].tagName.toLocaleLowerCase() == 'input' ? type.attr('type').toLocaleLowerCase() : type[0].tagName.toLocaleLowerCase();
+                switch (tagName) {
+                    case 'textarea':
+                        type = type.get(0);
+                        type.defaultValue = val;
+                        type.value = val;
+                        break;
+                    case 'select':
+                        type.find('option').each(function () { this.removeAttribute('selected'); })
+                        type.find('option[value="' + val + '"]').get(0).setAttribute('selected', 'selected');
+                        break;
+                    case 'radio':
+                        type.each(function () {
+                            var checked = this.value == val ? true : false;
+                            this.defaultChecked = checked;
+                            this.checked = checked;
+                        })
+                        break;
+                    case 'checkbox':
+                        if ($.type(val) == 'string') val = val.split(',');
+                        type.each(function () {
+                            var checked = in_array(this.value, val);
+                            this.defaultChecked = checked;
+                            this.checked = checked;
+                        })
+                        break;
+                    default:
+                        type = type.get(0);
+                        type.defaultValue = val;
+                        type.value = val;
+                }
+            }
+          
+            //表单是否已修改
+            //function IsModified() {
+            //    var result = false;
+            //    //初始化返回值
+            //    var colInput = document.getElementsByTagName("input");
+            //    //获取输入框控件
+            //    for (var i = 0; i < colInput.length; i++)
+            //        //逐个判断页面中的input控件
+            //    {
+            //        if (colInput[i].value != colInput[i].defaultValue)
+            //            //判断输入的值是否等于初始值
+            //        {
+            //            result = true;
+            //            //如果不相等，返回true，表示已经修改
+            //            colInput[i].style.backgroundColor = "#ff9000";
+            //            //改变被修改控件的背景色
+            //        }
+            //    }
+
+            //    var colSel = document.getElementsByTagName("select")
+            //    for (var j = 0; j < colSel.length; j++) {
+            //        if (colSel[j].value != colSel[j].defaultValue)
+            //        {
+            //            result = true;
+            //            colSel[j].style.backgroundColor = "#ff9000";
+            //        }
+            //    }
+
+            //    //var coltxt = document.getElementsByTagName("textarea");
+            //    //for (var k = 0 ; k < coltxt.length ; k++) {
+            //    //    if (coltxt[k].value != coltxt.defaultValue) {
+            //    //        result = true;
+            //    //        coltxt[k].style.backgroundColor = "#ff9000";
+            //    //    }
+            //    //}
+
+            //    return result;
+            //}
+
         </script>
 
         <%--加载商机信息--%>
@@ -234,23 +324,33 @@
                         $("#selShangJiLB").val(sjmx.LeiBie);
                         $("#selShangJiLB").val(sjmx.LeiBie).attr('selected', true).siblings('option').removeAttr('selected');
                         $("#selShangJiLB").selectmenu('refresh', true);
+                        inputDefault("#selShangJiLB", sjmx.LeiBie);
 
                         $("#txtShangJiNR").text(sjmx.NeiRong);
-                        $("#ipXiangMuYS").val(sjmx.XiangMuYS);
+                        inputDefault("#txtShangJiNR", sjmx.NeiRong);
+
+                        $("#ipXiangMuYS").val(sjmx.XiangMuYS / 10000);
+                        inputDefault("#ipXiangMuYS", sjmx.XiangMuYS / 10000);
+
                         $("#dtJieDanSJ").val(sjmx.YuQi);
+                        inputDefault("#dtJieDanSJ", sjmx.YuQi );
 
                         $("#selCaiGouFS").val(sjmx.CaiGouFS);
                         $("#selCaiGouFS").val(sjmx.CaiGouFS).attr('selected', true).siblings('option').removeAttr('selected');
                         $("#selCaiGouFS").selectmenu('refresh', true);
+                        inputDefault("#selCaiGouFS", sjmx.CaiGouFS);
 
                         $("#selDangQianJD").val(sjmx.DangQianJD);
                         $("#selDangQianJD").val(sjmx.DangQianJD).attr('selected', true).siblings('option').removeAttr('selected');
                         $("#selDangQianJD").selectmenu('refresh', true);
+                        inputDefault("#selDangQianJD",sjmx.DangQianJD);
 
                         var cdl = sjmx.ChengDanGL.substring(0, sjmx.ChengDanGL.length - 1);
                         $("#ragChengDanGL").val(cdl).slider("refresh");
+                        inputDefault("#ragChengDanGL",cdl);
 
                         $("#txtShangJiBZ").val(sjmx.BeiZhu);
+                        inputDefault("#txtShangJiBZ", sjmx.BeiZhu);
 
                     },
                     error: function () {
